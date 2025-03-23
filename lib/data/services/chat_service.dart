@@ -16,7 +16,7 @@ abstract class ChatService {
   Stream<bool> get connStream;
   bool isConnected = false;
   void dispose();
-  void sendMessage(String msg);
+  bool sendMessage(String msg);
 }
 
 class ChatServiceImpl implements ChatService {
@@ -50,6 +50,7 @@ class ChatServiceImpl implements ChatService {
         isConnected = false;
         _connController.add(false);
       },
+      cancelOnError: true,
     );
 
     try {
@@ -75,12 +76,14 @@ class ChatServiceImpl implements ChatService {
   }
 
   @override
-  void sendMessage(String message) {
+  bool sendMessage(String message) {
     if (!isConnected) {
-      return;
+      return false;
     }
     debugPrint("sendMessage $message");
     _channel.sink.add(message);
+
+    return true;
   }
 }
 

@@ -22,7 +22,7 @@ class ChatViewModel extends _$ChatViewModel {
         debugPrint("receiveMessage $message");
         state = state.copyWith(
           incomingMessage: message,
-          history: [...state.history, message],
+          history: [...state.history, Message(type: MessageType.incoming, data: message)],
         );
       },
       onDone: () {
@@ -59,6 +59,12 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   sendMessage(String message) {
-    ref.read(chatUseCaaeProvider).sendMessage(message);
+    final result = ref.read(chatUseCaaeProvider).sendMessage(message);
+    if (result) {
+      state = state.copyWith(
+        incomingMessage: message,
+        history: [...state.history, Message(type: MessageType.outgoing, data: message)],
+      );
+    }
   }
 }

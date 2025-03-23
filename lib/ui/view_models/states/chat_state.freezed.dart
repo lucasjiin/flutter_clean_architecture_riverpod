@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatState {
   String get incomingMessage;
-  List<String> get history;
+  List<Message> get history;
   bool get isConnected;
 
   /// Create a copy of ChatState
@@ -53,7 +53,7 @@ abstract mixin class $ChatStateCopyWith<$Res> {
   factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) _then) =
       _$ChatStateCopyWithImpl;
   @useResult
-  $Res call({String incomingMessage, List<String> history, bool isConnected});
+  $Res call({String incomingMessage, List<Message> history, bool isConnected});
 }
 
 /// @nodoc
@@ -80,7 +80,7 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
       history: null == history
           ? _self.history
           : history // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Message>,
       isConnected: null == isConnected
           ? _self.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -94,17 +94,17 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
 class _ChatState implements ChatState {
   _ChatState(
       {this.incomingMessage = '',
-      final List<String> history = const [],
+      final List<Message> history = const [],
       this.isConnected = false})
       : _history = history;
 
   @override
   @JsonKey()
   final String incomingMessage;
-  final List<String> _history;
+  final List<Message> _history;
   @override
   @JsonKey()
-  List<String> get history {
+  List<Message> get history {
     if (_history is EqualUnmodifiableListView) return _history;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_history);
@@ -152,7 +152,7 @@ abstract mixin class _$ChatStateCopyWith<$Res>
       __$ChatStateCopyWithImpl;
   @override
   @useResult
-  $Res call({String incomingMessage, List<String> history, bool isConnected});
+  $Res call({String incomingMessage, List<Message> history, bool isConnected});
 }
 
 /// @nodoc
@@ -179,7 +179,7 @@ class __$ChatStateCopyWithImpl<$Res> implements _$ChatStateCopyWith<$Res> {
       history: null == history
           ? _self._history
           : history // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<Message>,
       isConnected: null == isConnected
           ? _self.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable

@@ -8,10 +8,9 @@ part 'time_use_caae.g.dart';
 
 class TimeUseCaae {
   final TimeRepository _repository;
-
-  TimeUseCaae(this._repository);
-
+  String get time => _repository.time;
   Stream<String> get stream => _repository.stream;
+  TimeUseCaae(this._repository);
 }
 
 @riverpod
@@ -20,4 +19,3 @@ TimeUseCaae timeUsecase(Ref ref) {
 
   return TimeUseCaae(repository);
 }
-

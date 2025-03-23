@@ -11,7 +11,7 @@ abstract class ChatRepository {
   Stream<String> get stream;
   Stream<bool> get connStream;
   bool get isConnected;
-  void sendMessage(String message);
+  bool sendMessage(String message);
 }
 
 @riverpod

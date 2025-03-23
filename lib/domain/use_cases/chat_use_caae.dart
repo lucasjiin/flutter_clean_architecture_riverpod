@@ -15,9 +15,7 @@ class ChatUseCaae {
   Stream<bool> get connStream => _repository.connStream;
   bool get isConnected => _repository.isConnected;
 
-  void sendMessage(String message) {
-    _repository.sendMessage(message);
-  }
+  bool sendMessage(String message) => _repository.sendMessage(message);
 }
 
 @riverpod

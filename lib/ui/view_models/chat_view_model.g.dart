@@ -6,7 +6,7 @@ part of 'chat_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatViewModelHash() => r'a70923a44ce46d0c1878db18a4dc01fcc3023a23';
+String _$chatViewModelHash() => r'a0e19f8cf6df974a78ff0d52f68296337a428cd3';
 
 /// See also [ChatViewModel].
 @ProviderFor(ChatViewModel)

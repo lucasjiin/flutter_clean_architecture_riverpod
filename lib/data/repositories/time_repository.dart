@@ -7,16 +7,18 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'time_repository.g.dart';
 
 abstract class TimeRepository {
+  String get time;
   Stream<String> get stream;
 }
 
 class TimeRepositoryImpl implements TimeRepository {
   final TimeService _service;
-
-  TimeRepositoryImpl(this._service);
-
+  @override
+  String get time => _service.time;
   @override
   Stream<String> get stream => _service.stream;
+
+  TimeRepositoryImpl(this._service);
 }
 
 @riverpod

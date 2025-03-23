@@ -15,7 +15,5 @@ class ChatRepositoryImpl implements ChatRepository {
   ChatRepositoryImpl(this._service);
 
   @override
-  void sendMessage(String message) {
-    _service.sendMessage(message);
-  }
+  bool sendMessage(String message) => _service.sendMessage(message);
 }

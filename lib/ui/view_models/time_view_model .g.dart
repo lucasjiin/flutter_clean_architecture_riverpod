@@ -6,7 +6,7 @@ part of 'time_view_model .dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$timeViewModelHash() => r'0ec0c78cccb02d0cb25e9180a8ccffa5527ea6c2';
+String _$timeViewModelHash() => r'cf0d6a17e19b71f42aec02c0be0dcf9876eac341';
 
 /// See also [TimeViewModel].
 @ProviderFor(TimeViewModel)

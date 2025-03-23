@@ -2,7 +2,6 @@
 
 import 'package:app_flutter/domain/use_cases/time_use_caae.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'time_view_model .g.dart';
@@ -11,7 +10,8 @@ part 'time_view_model .g.dart';
 class TimeViewModel extends _$TimeViewModel {
   @override
   String build() {
-    final stream = ref.watch(timeUsecaseProvider).stream;
+    final provider = ref.watch(timeUsecaseProvider);
+    final stream = provider.stream;
 
     final subscription = stream.listen((time) {
       state = time;
@@ -27,6 +27,6 @@ class TimeViewModel extends _$TimeViewModel {
       subscription.cancel();
     });
 
-    return DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
+    return provider.time;
   }
 }
