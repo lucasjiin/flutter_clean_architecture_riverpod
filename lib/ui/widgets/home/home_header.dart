@@ -1,6 +1,6 @@
 // home_header.dart
 
-import 'package:app_flutter/ui/view_models/time_view_model%20.dart';
+import 'package:app_flutter/ui/view_models/time_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

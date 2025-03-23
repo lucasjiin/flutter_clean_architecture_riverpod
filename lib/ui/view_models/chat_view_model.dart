@@ -1,4 +1,4 @@
-// home_view_model.dart
+// chat_view_model.dart
 
 import 'dart:async';
 
