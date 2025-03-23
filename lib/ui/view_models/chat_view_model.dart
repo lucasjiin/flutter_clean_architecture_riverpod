@@ -16,20 +16,14 @@ class ChatViewModel extends _$ChatViewModel {
     final chatUseCaae = ref.watch(chatUseCaaeProvider);
     final stream = chatUseCaae.stream;
     final connStream = chatUseCaae.connStream;
+    final history = chatUseCaae.history;
 
     final subscription = stream.listen(
       (message) {
-        debugPrint("receiveMessage $message");
         state = state.copyWith(
           incomingMessage: message,
-          history: [...state.history, Message(type: MessageType.incoming, data: message)],
+          history: history,
         );
-      },
-      onDone: () {
-        debugPrint("finished stream");
-      },
-      onError: (error) {
-        debugPrint("error stream: ${error.toString()}");
       },
       cancelOnError: true,
     );
@@ -40,12 +34,6 @@ class ChatViewModel extends _$ChatViewModel {
         state = state.copyWith(
           isConnected: isConnected,
         );
-      },
-      onDone: () {
-        debugPrint("finished connection stream");
-      },
-      onError: (error) {
-        debugPrint("error connection stream: ${error.toString()}");
       },
       cancelOnError: true,
     );
@@ -58,13 +46,14 @@ class ChatViewModel extends _$ChatViewModel {
     return ChatState(isConnected: chatUseCaae.isConnected);
   }
 
-  sendMessage(String message) {
+  bool sendMessage(String message) {
     final result = ref.read(chatUseCaaeProvider).sendMessage(message);
+    final history = ref.read(chatUseCaaeProvider).history;
     if (result) {
       state = state.copyWith(
-        incomingMessage: message,
-        history: [...state.history, Message(type: MessageType.outgoing, data: message)],
+        history: history,
       );
     }
+    return result;
   }
 }

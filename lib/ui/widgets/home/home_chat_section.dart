@@ -3,10 +3,9 @@
 import 'dart:math';
 
 import 'package:app_flutter/core/utils/time.dart';
+import 'package:app_flutter/data/repositories/chat_repository_impl.dart';
 import 'package:app_flutter/ui/view_models/chat_view_model.dart';
-import 'package:app_flutter/ui/view_models/states/chat_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const outgoingMessages = [
@@ -16,16 +15,18 @@ const outgoingMessages = [
   "Have a nice day",
   "Apple",
   "Orange",
+  "Dad",
+  "Mom",
 ];
 
 class _ChatBody extends ConsumerStatefulWidget {
   const _ChatBody();
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => __ChatBodyState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ChatBodyState();
 }
 
-class __ChatBodyState extends ConsumerState<_ChatBody> {
+class _ChatBodyState extends ConsumerState<_ChatBody> {
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -39,13 +40,16 @@ class __ChatBodyState extends ConsumerState<_ChatBody> {
     final history = ref.watch(chatViewModelProvider).history;
     final isConnected = ref.read(chatViewModelProvider).isConnected;
 
-    ref.listen(chatViewModelProvider, (previous, next) {
-      _scrollController.animateTo(
+    ref.listen(
+      chatViewModelProvider,
+      (previous, next) {
+        _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
           duration: Duration(milliseconds: 150),
           curve: Curves.easeOut,
         );
-    },);
+      },
+    );
 
     return Container(
       height: 500,

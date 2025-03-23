@@ -13,12 +13,14 @@ abstract class TimeRepository {
 
 class TimeRepositoryImpl implements TimeRepository {
   final TimeService _service;
-  @override
-  String get time => _service.time;
-  @override
-  Stream<String> get stream => _service.stream;
 
   TimeRepositoryImpl(this._service);
+
+  @override
+  String get time => _service.time;
+
+  @override
+  Stream<String> get stream => _service.stream;
 }
 
 @riverpod

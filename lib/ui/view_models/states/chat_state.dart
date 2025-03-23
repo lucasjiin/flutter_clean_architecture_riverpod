@@ -1,23 +1,9 @@
 // chat_state.dart
 
+import 'package:app_flutter/data/repositories/chat_repository_impl.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chat_state.freezed.dart';
-
-enum MessageType {
-  incoming,
-  outgoing,
-}
-
-class Message {
-  MessageType type;
-  String data;
-
-  Message({
-    required this.type,
-    required this.data,
-  });
-}
 
 @freezed
 abstract class ChatState with _$ChatState {

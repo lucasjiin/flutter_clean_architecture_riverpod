@@ -1,7 +1,6 @@
 // home_page.dart
 
 import 'package:app_flutter/ui/widgets/home/home_body.dart';
-import 'package:app_flutter/ui/widgets/home/home_chat_section.dart';
 import 'package:app_flutter/ui/widgets/home/home_footer.dart';
 import 'package:app_flutter/ui/widgets/home/home_header.dart';
 import 'package:flutter/material.dart';

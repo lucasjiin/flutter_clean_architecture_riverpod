@@ -23,13 +23,6 @@ class ChatServiceImpl implements ChatService {
   final WebSocketChannel _channel;
   final StreamController<String> _controller = StreamController.broadcast();
   final StreamController<bool> _connController = StreamController.broadcast();
-  @override
-  bool isConnected = false;
-
-  @override
-  Stream<String> get stream => _controller.stream;
-  @override
-  Stream<bool> get connStream => _connController.stream;
 
   ChatServiceImpl() : _channel = WebSocketChannel.connect(Uri.parse('wss://echo.websocket.org/')) {
     _init();
@@ -39,14 +32,17 @@ class ChatServiceImpl implements ChatService {
     _connController.add(false);
 
     _channel.stream.listen(
-      (message) => _controller.add(message),
+      (message) {
+        debugPrint("receiveMessage $message");
+        _controller.add(message);
+      },
       onDone: () {
         isConnected = false;
         debugPrint("finish stream");
         _connController.add(false);
       },
       onError: (error) {
-        debugPrint("stream Error: $error");
+        debugPrint("error stream : $error");
         isConnected = false;
         _connController.add(false);
       },
@@ -59,10 +55,10 @@ class ChatServiceImpl implements ChatService {
       _connController.add(true);
     } on SocketException catch (error) {
       isConnected = false;
-      debugPrint("SocketException Error: $error");
+      debugPrint("SocketException: $error");
       _connController.add(false);
     } on WebSocketChannelException catch (error) {
-      debugPrint("WebSocketChannelException Error: $error");
+      debugPrint("WebSocketChannelException: $error");
       isConnected = false;
       _connController.add(false);
     }
@@ -85,6 +81,15 @@ class ChatServiceImpl implements ChatService {
 
     return true;
   }
+
+  @override
+  bool isConnected = false;
+
+  @override
+  Stream<String> get stream => _controller.stream;
+
+  @override
+  Stream<bool> get connStream => _connController.stream;
 }
 
 @riverpod

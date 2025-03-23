@@ -17,8 +17,6 @@ abstract class TimeService {
 class TimeServiceImpl implements TimeService {
   final StreamController<String> _controller = StreamController<String>.broadcast();
   Timer? _timer;
-  @override
-  String time = Time.now();
 
   TimeServiceImpl() {
     _startTimer();
@@ -33,6 +31,9 @@ class TimeServiceImpl implements TimeService {
 
   @override
   Stream<String> get stream => _controller.stream;
+
+  @override
+  String time = Time.now();
 
   @override
   void dispose() {
