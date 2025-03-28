@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'chat_state.dart';
+part of 'chat_view_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,56 +14,62 @@ part of 'chat_state.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$ChatState {
+mixin _$ChatViewState {
   String get incomingMessage;
   List<Message> get history;
   bool get isConnected;
+  String get time;
 
-  /// Create a copy of ChatState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $ChatStateCopyWith<ChatState> get copyWith =>
-      _$ChatStateCopyWithImpl<ChatState>(this as ChatState, _$identity);
+  $HomeStateCopyWith<ChatViewState> get copyWith =>
+      _$HomeStateCopyWithImpl<ChatViewState>(this as ChatViewState, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ChatState &&
+            other is ChatViewState &&
             (identical(other.incomingMessage, incomingMessage) ||
                 other.incomingMessage == incomingMessage) &&
             const DeepCollectionEquality().equals(other.history, history) &&
             (identical(other.isConnected, isConnected) ||
-                other.isConnected == isConnected));
+                other.isConnected == isConnected) &&
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, incomingMessage,
-      const DeepCollectionEquality().hash(history), isConnected);
+      const DeepCollectionEquality().hash(history), isConnected, time);
 
   @override
   String toString() {
-    return 'ChatState(incomingMessage: $incomingMessage, history: $history, isConnected: $isConnected)';
+    return 'HomeState(incomingMessage: $incomingMessage, history: $history, isConnected: $isConnected, time: $time)';
   }
 }
 
 /// @nodoc
-abstract mixin class $ChatStateCopyWith<$Res> {
-  factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) _then) =
-      _$ChatStateCopyWithImpl;
+abstract mixin class $HomeStateCopyWith<$Res> {
+  factory $HomeStateCopyWith(ChatViewState value, $Res Function(ChatViewState) _then) =
+      _$HomeStateCopyWithImpl;
   @useResult
-  $Res call({String incomingMessage, List<Message> history, bool isConnected});
+  $Res call(
+      {String incomingMessage,
+      List<Message> history,
+      bool isConnected,
+      String time});
 }
 
 /// @nodoc
-class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
-  _$ChatStateCopyWithImpl(this._self, this._then);
+class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
+  _$HomeStateCopyWithImpl(this._self, this._then);
 
-  final ChatState _self;
-  final $Res Function(ChatState) _then;
+  final ChatViewState _self;
+  final $Res Function(ChatViewState) _then;
 
-  /// Create a copy of ChatState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -71,6 +77,7 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
     Object? incomingMessage = null,
     Object? history = null,
     Object? isConnected = null,
+    Object? time = null,
   }) {
     return _then(_self.copyWith(
       incomingMessage: null == incomingMessage
@@ -85,17 +92,22 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
           ? _self.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
               as bool,
+      time: null == time
+          ? _self.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _ChatState implements ChatState {
-  _ChatState(
+class _HomeState implements ChatViewState {
+  _HomeState(
       {this.incomingMessage = '',
       final List<Message> history = const [],
-      this.isConnected = false})
+      this.isConnected = false,
+      this.time = ''})
       : _history = history;
 
   @override
@@ -113,56 +125,64 @@ class _ChatState implements ChatState {
   @override
   @JsonKey()
   final bool isConnected;
+  @override
+  @JsonKey()
+  final String time;
 
-  /// Create a copy of ChatState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$ChatStateCopyWith<_ChatState> get copyWith =>
-      __$ChatStateCopyWithImpl<_ChatState>(this, _$identity);
+  _$HomeStateCopyWith<_HomeState> get copyWith =>
+      __$HomeStateCopyWithImpl<_HomeState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ChatState &&
+            other is _HomeState &&
             (identical(other.incomingMessage, incomingMessage) ||
                 other.incomingMessage == incomingMessage) &&
             const DeepCollectionEquality().equals(other._history, _history) &&
             (identical(other.isConnected, isConnected) ||
-                other.isConnected == isConnected));
+                other.isConnected == isConnected) &&
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, incomingMessage,
-      const DeepCollectionEquality().hash(_history), isConnected);
+      const DeepCollectionEquality().hash(_history), isConnected, time);
 
   @override
   String toString() {
-    return 'ChatState(incomingMessage: $incomingMessage, history: $history, isConnected: $isConnected)';
+    return 'HomeState(incomingMessage: $incomingMessage, history: $history, isConnected: $isConnected, time: $time)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$ChatStateCopyWith<$Res>
-    implements $ChatStateCopyWith<$Res> {
-  factory _$ChatStateCopyWith(
-          _ChatState value, $Res Function(_ChatState) _then) =
-      __$ChatStateCopyWithImpl;
+abstract mixin class _$HomeStateCopyWith<$Res>
+    implements $HomeStateCopyWith<$Res> {
+  factory _$HomeStateCopyWith(
+          _HomeState value, $Res Function(_HomeState) _then) =
+      __$HomeStateCopyWithImpl;
   @override
   @useResult
-  $Res call({String incomingMessage, List<Message> history, bool isConnected});
+  $Res call(
+      {String incomingMessage,
+      List<Message> history,
+      bool isConnected,
+      String time});
 }
 
 /// @nodoc
-class __$ChatStateCopyWithImpl<$Res> implements _$ChatStateCopyWith<$Res> {
-  __$ChatStateCopyWithImpl(this._self, this._then);
+class __$HomeStateCopyWithImpl<$Res> implements _$HomeStateCopyWith<$Res> {
+  __$HomeStateCopyWithImpl(this._self, this._then);
 
-  final _ChatState _self;
-  final $Res Function(_ChatState) _then;
+  final _HomeState _self;
+  final $Res Function(_HomeState) _then;
 
-  /// Create a copy of ChatState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -170,8 +190,9 @@ class __$ChatStateCopyWithImpl<$Res> implements _$ChatStateCopyWith<$Res> {
     Object? incomingMessage = null,
     Object? history = null,
     Object? isConnected = null,
+    Object? time = null,
   }) {
-    return _then(_ChatState(
+    return _then(_HomeState(
       incomingMessage: null == incomingMessage
           ? _self.incomingMessage
           : incomingMessage // ignore: cast_nullable_to_non_nullable
@@ -184,6 +205,10 @@ class __$ChatStateCopyWithImpl<$Res> implements _$ChatStateCopyWith<$Res> {
           ? _self.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
               as bool,
+      time: null == time
+          ? _self.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }

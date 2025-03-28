@@ -3,10 +3,6 @@
 import 'dart:async';
 
 import 'package:app_flutter/core/utils/time.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'time_servce.g.dart';
 
 abstract class TimeService {
   String time = '';
@@ -17,6 +13,10 @@ abstract class TimeService {
 class TimeServiceImpl implements TimeService {
   final StreamController<String> _controller = StreamController<String>.broadcast();
   Timer? _timer;
+  @override
+  Stream<String> get stream => _controller.stream;
+  @override
+  String time = Time.now();
 
   TimeServiceImpl() {
     _startTimer();
@@ -30,23 +30,8 @@ class TimeServiceImpl implements TimeService {
   }
 
   @override
-  Stream<String> get stream => _controller.stream;
-
-  @override
-  String time = Time.now();
-
-  @override
   void dispose() {
     _timer?.cancel();
     _controller.close();
   }
-}
-
-@riverpod
-TimeService timeService(Ref ref) {
-  final service = TimeServiceImpl();
-
-  ref.onDispose(() => service.dispose());
-
-  return service;
 }

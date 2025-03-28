@@ -1,4 +1,4 @@
-// chat_repository.dart
+// chat_repository_impl.dart
 
 import 'dart:async';
 
@@ -25,33 +25,37 @@ class ChatRepositoryImpl implements ChatRepository {
   StreamSubscription<String>? _subscription;
   @override
   List<Message> history = [];
+  @override
+  Stream<String> get stream => _service.stream;
+  @override
+  Stream<bool> get connStream => _service.connStream;
+  @override
+  bool get isConnected => _service.isConnected;
 
   ChatRepositoryImpl(this._service) {
     _subscription = _service.stream.listen(
       (message) {
-        history.add(Message(type: MessageType.incoming, data: message));
+        _addHistory(MessageType.incoming, message);
       },
       cancelOnError: true,
     );
   }
 
   @override
-  Stream<String> get stream => _service.stream;
-
-  @override
-  Stream<bool> get connStream => _service.connStream;
-
-  @override
-  bool get isConnected => _service.isConnected;
-
-  @override
   bool sendMessage(String message) {
     final result = _service.sendMessage(message);
     if (result) {
-      history.add(Message(type: MessageType.outgoing, data: message));
+      _addHistory(MessageType.outgoing, message);
     }
 
     return result;
+  }
+
+  void _addHistory(MessageType type, String message) {
+    if (history.length > 100) {
+      history.removeAt(0);
+    }
+    history.add(Message(type: type, data: message));
   }
 
   @override

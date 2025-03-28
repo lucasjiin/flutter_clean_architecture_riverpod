@@ -1,11 +1,6 @@
 // websocket_repository.dart
 
 import 'package:app_flutter/data/repositories/chat_repository_impl.dart';
-import 'package:app_flutter/data/services/chat_service.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'chat_repository.g.dart';
 
 abstract class ChatRepository {
   List<Message> history = [];
@@ -14,11 +9,4 @@ abstract class ChatRepository {
   bool get isConnected;
   bool sendMessage(String message);
   void dispose();
-}
-
-@riverpod
-ChatRepository chatRepository(Ref ref) {
-  final service = ref.watch(chatServiceProvider);
-
-  return ChatRepositoryImpl(service);
 }

@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 void main() {
   runZonedGuarded(
     () async {
-      await dotenv.load(fileName: ".env");
+      await dotenv.load(fileName: "assets/config/.env");
 
       FlutterError.onError = (FlutterErrorDetails details) {
         debugPrint("error $details");

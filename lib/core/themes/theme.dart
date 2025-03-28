@@ -1,3 +1,3 @@
 // theme.dart
 
-abstract final class AppTheme {}
+final class AppTheme {}
