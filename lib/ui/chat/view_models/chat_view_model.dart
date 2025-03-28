@@ -1,9 +1,9 @@
 // home_view_model.dart
 
-import 'package:app_flutter/core/utils/time.dart';
 import 'package:app_flutter/core/dependencies.dart';
+import 'package:app_flutter/core/utils/logger.dart';
+import 'package:app_flutter/core/utils/time.dart';
 import 'package:app_flutter/data/repositories/chat_repository_impl.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -22,6 +22,8 @@ abstract class ChatViewState with _$ChatViewState {
 
 @riverpod
 class ChatViewModel extends _$ChatViewModel {
+  final _logTag = "ChatViewModel";
+
   @override
   ChatViewState build() {
     final chatRepository = ref.watch(chatRepositoryProvider);
@@ -48,7 +50,7 @@ class ChatViewModel extends _$ChatViewModel {
 
     final connectionSubscription = chatConnStream.listen(
       (isConnected) {
-        debugPrint("isConnected $isConnected");
+        Logger.info(_logTag, "isConnected");
         state = state.copyWith(
           isConnected: isConnected,
         );

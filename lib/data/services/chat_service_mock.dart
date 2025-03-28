@@ -2,9 +2,12 @@
 
 import 'dart:async';
 
+import 'package:app_flutter/core/utils/logger.dart';
 import 'package:app_flutter/data/services/chat_service.dart';
 
 class ChatServiceMock implements ChatService {
+  final _logTag = "ChatServiceMock";
+
   final StreamController<String> _controller = StreamController.broadcast();
   final StreamController<bool> _connController = StreamController.broadcast();
   @override
@@ -31,9 +34,12 @@ class ChatServiceMock implements ChatService {
       return false;
     }
 
+    Logger.info(_logTag, "sendMessage");
+
     Future.delayed(
       Duration(milliseconds: 100),
       () {
+        Logger.info(_logTag, "receiveMessage");
         _controller.sink.add(msg);
       },
     );

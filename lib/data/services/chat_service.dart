@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:app_flutter/core/utils/logger.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -16,6 +16,8 @@ abstract class ChatService {
 }
 
 class ChatServiceImpl implements ChatService {
+  final _logTag = 'ChatServiceImpl';
+
   WebSocketChannel? _channel;
   final StreamController<String> _controller = StreamController.broadcast();
   final StreamController<bool> _connController = StreamController.broadcast();
@@ -36,17 +38,17 @@ class ChatServiceImpl implements ChatService {
 
     _channel?.stream.listen(
       (message) {
-        debugPrint("receiveMessage $message");
+        Logger.info(_logTag, "receiveMessage $message");
         _controller.add(message);
       },
       onDone: () {
         isConnected = false;
-        debugPrint("finish stream");
+        Logger.info(_logTag, "finish stream");
         _connController.add(false);
         _reConnect();
       },
       onError: (error) {
-        debugPrint("error stream : $error");
+        Logger.error(_logTag, "error stream", error: error);
         isConnected = false;
         _connController.add(false);
         _reConnect();
@@ -60,11 +62,11 @@ class ChatServiceImpl implements ChatService {
       _connController.add(true);
     } on SocketException catch (error) {
       isConnected = false;
-      debugPrint("SocketException: $error");
+      Logger.error(_logTag, "SocketException", error: error);
       _connController.add(false);
       _reConnect();
     } on WebSocketChannelException catch (error) {
-      debugPrint("WebSocketChannelException: $error");
+      Logger.error(_logTag, "WebSocketChannelException", error: error);
       isConnected = false;
       _connController.add(false);
       _reConnect();
@@ -83,7 +85,8 @@ class ChatServiceImpl implements ChatService {
     if (!isConnected) {
       return false;
     }
-    debugPrint("sendMessage $message");
+    Logger.info(_logTag, "sendMessage");
+
     _channel?.sink.add(message);
 
     return true;
