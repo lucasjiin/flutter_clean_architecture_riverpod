@@ -40,11 +40,11 @@ class _MessageBoxState extends ConsumerState<_MessageBox> {
 
   @override
   Widget build(BuildContext context) {
-    final history = ref.watch(homeViewModelProvider.select((data) => data.history));
-    final isConnected = ref.read(homeViewModelProvider).isConnected;
+    final history = ref.watch(chatViewModelProvider.select((data) => data.history));
+    final isConnected = ref.read(chatViewModelProvider).isConnected;
     int scrollJobCnt = 0;
     ref.listen(
-      homeViewModelProvider.select((data) => data.history),
+      chatViewModelProvider.select((data) => data.history),
       (previous, next) {
         scrollJobCnt++;
         Future.delayed(
@@ -99,7 +99,7 @@ class _MessageBoxState extends ConsumerState<_MessageBox> {
     return Column(
       crossAxisAlignment: message.type == MessageType.incoming ? CrossAxisAlignment.start : CrossAxisAlignment.end,
       children: [
-        Text(Time.now()),
+        Text(Time.format()),
         Text(
           message.data,
           style: Theme.of(context).textTheme.headlineSmall,
@@ -147,7 +147,7 @@ class ChatBody extends ConsumerWidget {
           child: Text("send"),
           onPressed: () {
             final message = outgoingMessages[Random().nextInt(outgoingMessages.length)];
-            ref.read(homeViewModelProvider.notifier).sendMessage(message);
+            ref.read(chatViewModelProvider.notifier).sendMessage(message);
           },
         ),
       ),

@@ -9,7 +9,7 @@ class ChatHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final time = ref.watch(homeViewModelProvider.select((data) => data.time));
+    final time = ref.watch(chatViewModelProvider.select((data) => data.time));
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,

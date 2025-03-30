@@ -6,17 +6,17 @@ part of 'chat_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$homeViewModelHash() => r'94797277a90e9d7ec535d8e4499669df447f67e5';
+String _$chatViewModelHash() => r'28ed9527e1107f81b0cf804a9348247d70b2e9f7';
 
 /// See also [ChatViewModel].
 @ProviderFor(ChatViewModel)
-final homeViewModelProvider =
+final chatViewModelProvider =
     AutoDisposeNotifierProvider<ChatViewModel, ChatViewState>.internal(
   ChatViewModel.new,
-  name: r'homeViewModelProvider',
+  name: r'chatViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$homeViewModelHash,
+      : _$chatViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

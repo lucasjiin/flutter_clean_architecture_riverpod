@@ -17,6 +17,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     return AppPage(
+      title: "Home",
       body: HomeBody(),
       footer: HomeFooter(),
     );

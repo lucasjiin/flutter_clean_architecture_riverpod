@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:app_flutter/core/utils/logger.dart';
+import 'package:app_flutter/core/dependencies.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -16,7 +16,7 @@ abstract class ChatService {
 }
 
 class ChatServiceImpl implements ChatService {
-  final _logTag = 'ChatServiceImpl';
+  final _logTag = 'ChatService';
 
   WebSocketChannel? _channel;
   final StreamController<String> _controller = StreamController.broadcast();
@@ -38,17 +38,17 @@ class ChatServiceImpl implements ChatService {
 
     _channel?.stream.listen(
       (message) {
-        Logger.info(_logTag, "receiveMessage $message");
+        logger.info(_logTag, "receiveMessage $message");
         _controller.add(message);
       },
       onDone: () {
         isConnected = false;
-        Logger.info(_logTag, "finish stream");
+        logger.info(_logTag, "finish stream");
         _connController.add(false);
         _reConnect();
       },
       onError: (error) {
-        Logger.error(_logTag, "error stream", error: error);
+        logger.error(_logTag, "error stream", error: error);
         isConnected = false;
         _connController.add(false);
         _reConnect();
@@ -62,11 +62,11 @@ class ChatServiceImpl implements ChatService {
       _connController.add(true);
     } on SocketException catch (error) {
       isConnected = false;
-      Logger.error(_logTag, "SocketException", error: error);
+      logger.error(_logTag, "SocketException", error: error);
       _connController.add(false);
       _reConnect();
     } on WebSocketChannelException catch (error) {
-      Logger.error(_logTag, "WebSocketChannelException", error: error);
+      logger.error(_logTag, "WebSocketChannelException", error: error);
       isConnected = false;
       _connController.add(false);
       _reConnect();
@@ -85,7 +85,7 @@ class ChatServiceImpl implements ChatService {
     if (!isConnected) {
       return false;
     }
-    Logger.info(_logTag, "sendMessage");
+    logger.info(_logTag, "sendMessage");
 
     _channel?.sink.add(message);
 

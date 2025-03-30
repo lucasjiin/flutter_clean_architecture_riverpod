@@ -20,12 +20,13 @@ mixin _$ChatViewState {
   bool get isConnected;
   String get time;
 
-  /// Create a copy of HomeState
+  /// Create a copy of ChatViewState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $HomeStateCopyWith<ChatViewState> get copyWith =>
-      _$HomeStateCopyWithImpl<ChatViewState>(this as ChatViewState, _$identity);
+  $ChatViewStateCopyWith<ChatViewState> get copyWith =>
+      _$ChatViewStateCopyWithImpl<ChatViewState>(
+          this as ChatViewState, _$identity);
 
   @override
   bool operator ==(Object other) {
@@ -46,14 +47,15 @@ mixin _$ChatViewState {
 
   @override
   String toString() {
-    return 'HomeState(incomingMessage: $incomingMessage, history: $history, isConnected: $isConnected, time: $time)';
+    return 'ChatViewState(incomingMessage: $incomingMessage, history: $history, isConnected: $isConnected, time: $time)';
   }
 }
 
 /// @nodoc
-abstract mixin class $HomeStateCopyWith<$Res> {
-  factory $HomeStateCopyWith(ChatViewState value, $Res Function(ChatViewState) _then) =
-      _$HomeStateCopyWithImpl;
+abstract mixin class $ChatViewStateCopyWith<$Res> {
+  factory $ChatViewStateCopyWith(
+          ChatViewState value, $Res Function(ChatViewState) _then) =
+      _$ChatViewStateCopyWithImpl;
   @useResult
   $Res call(
       {String incomingMessage,
@@ -63,13 +65,14 @@ abstract mixin class $HomeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
-  _$HomeStateCopyWithImpl(this._self, this._then);
+class _$ChatViewStateCopyWithImpl<$Res>
+    implements $ChatViewStateCopyWith<$Res> {
+  _$ChatViewStateCopyWithImpl(this._self, this._then);
 
   final ChatViewState _self;
   final $Res Function(ChatViewState) _then;
 
-  /// Create a copy of HomeState
+  /// Create a copy of ChatViewState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -129,7 +132,7 @@ class _HomeState implements ChatViewState {
   @JsonKey()
   final String time;
 
-  /// Create a copy of HomeState
+  /// Create a copy of ChatViewState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -156,13 +159,13 @@ class _HomeState implements ChatViewState {
 
   @override
   String toString() {
-    return 'HomeState(incomingMessage: $incomingMessage, history: $history, isConnected: $isConnected, time: $time)';
+    return 'ChatViewState(incomingMessage: $incomingMessage, history: $history, isConnected: $isConnected, time: $time)';
   }
 }
 
 /// @nodoc
 abstract mixin class _$HomeStateCopyWith<$Res>
-    implements $HomeStateCopyWith<$Res> {
+    implements $ChatViewStateCopyWith<$Res> {
   factory _$HomeStateCopyWith(
           _HomeState value, $Res Function(_HomeState) _then) =
       __$HomeStateCopyWithImpl;
@@ -182,7 +185,7 @@ class __$HomeStateCopyWithImpl<$Res> implements _$HomeStateCopyWith<$Res> {
   final _HomeState _self;
   final $Res Function(_HomeState) _then;
 
-  /// Create a copy of HomeState
+  /// Create a copy of ChatViewState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')

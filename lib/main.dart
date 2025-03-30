@@ -3,7 +3,7 @@
 import 'dart:async';
 
 import 'package:app_flutter/application.dart';
-import 'package:app_flutter/core/utils/logger.dart';
+import 'package:app_flutter/core/dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,13 +16,13 @@ void main() {
       await dotenv.load(fileName: "assets/config/.env");
 
       FlutterError.onError = (FlutterErrorDetails details) {
-        Logger.error(_logTag, '$details');
+        logger.error(_logTag, '$details');
       };
 
       runApp(ProviderScope(child: const Application()));
     },
     (error, stack) {
-      Logger.error(_logTag, '$error', stackTrace: stack);
+      logger.error(_logTag, '$error', stackTrace: stack);
     },
   );
 }

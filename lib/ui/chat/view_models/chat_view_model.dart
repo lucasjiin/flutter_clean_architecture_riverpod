@@ -1,7 +1,6 @@
 // home_view_model.dart
 
 import 'package:app_flutter/core/dependencies.dart';
-import 'package:app_flutter/core/utils/logger.dart';
 import 'package:app_flutter/core/utils/time.dart';
 import 'package:app_flutter/data/repositories/chat_repository_impl.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -50,7 +49,7 @@ class ChatViewModel extends _$ChatViewModel {
 
     final connectionSubscription = chatConnStream.listen(
       (isConnected) {
-        Logger.info(_logTag, "isConnected");
+        logger.info(_logTag, "isConnected");
         state = state.copyWith(
           isConnected: isConnected,
         );
@@ -63,7 +62,7 @@ class ChatViewModel extends _$ChatViewModel {
       connectionSubscription.cancel();
       chatSubscription.cancel();
     });
-    return ChatViewState(isConnected: chatRepository.isConnected, time: Time.now());
+    return ChatViewState(isConnected: chatRepository.isConnected, time: Time.format());
   }
 
   bool sendMessage(String message) {

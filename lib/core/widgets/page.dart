@@ -5,34 +5,35 @@ import 'package:app_flutter/core/themes/dimens.dart';
 import 'package:flutter/material.dart';
 
 class AppPage extends StatelessWidget {
+  final String title;
   final Widget? header;
   final Widget? body;
   final Widget? footer;
 
-  const AppPage({super.key, this.header, this.body, this.footer});
+  const AppPage({super.key, required this.title, this.header, this.body, this.footer});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Home'),
+        title: Text(title),
       ),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
-            _makeHeader(context),
-            _makeBody(context),
-            _makeFooter(context),
+            _buildHeader(context),
+            _buildBody(context),
+            _buildFooter(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _makeHeader(BuildContext context) {
+  Widget _buildHeader(BuildContext context) {
     if (header == null) {
       return Container();
     } else {
@@ -46,7 +47,7 @@ class AppPage extends StatelessWidget {
     }
   }
 
-  Widget _makeBody(BuildContext context) {
+  Widget _buildBody(BuildContext context) {
     if (body == null) {
       return Container();
     } else {
@@ -61,7 +62,7 @@ class AppPage extends StatelessWidget {
     }
   }
 
-  Widget _makeFooter(BuildContext context) {
+  Widget _buildFooter(BuildContext context) {
     if (body == null) {
       return Container();
     } else {

@@ -13,6 +13,7 @@ class ChatPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppPage(
+      title: "Chat",
       header: const ChatHeader(),
       body: const ChatBody(),
       footer: const ChatFooter(),

@@ -11,13 +11,17 @@ class HomeBody extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ElevatedButton(
-          onPressed: () {
-            context.go('/chat');
-          },
-          child: Text('Go Chat'),
-        ),
+        _buildButton(context),
       ],
     );
+  }
+
+  Widget _buildButton(BuildContext context) {
+    return ElevatedButton(
+        onPressed: () {
+          context.go('/chat');
+        },
+        child: Text('Go Chat'),
+      );
   }
 }

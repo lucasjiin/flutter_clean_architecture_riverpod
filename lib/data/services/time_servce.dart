@@ -16,7 +16,7 @@ class TimeServiceImpl implements TimeService {
   @override
   Stream<String> get stream => _controller.stream;
   @override
-  String time = Time.now();
+  String time = Time.format();
 
   TimeServiceImpl() {
     _startTimer();
@@ -24,7 +24,7 @@ class TimeServiceImpl implements TimeService {
 
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      time = Time.now();
+      time = Time.format();
       _controller.add(time);
     });
   }
