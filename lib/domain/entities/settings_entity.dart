@@ -26,4 +26,7 @@ class SettingsEntity {
 
   @override
   int get hashCode => userName.hashCode ^ role.hashCode;
+
+  @override
+  String toString() => 'SettingsEntity(userName: $userName, role: $role)';
 }

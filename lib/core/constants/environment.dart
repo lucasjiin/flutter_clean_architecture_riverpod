@@ -1,0 +1,1 @@
+const testMode = bool.fromEnvironment('IS_TEST');

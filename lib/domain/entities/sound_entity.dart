@@ -14,6 +14,9 @@ class SoundEntity {
   }
 
   @override
+  String toString() => 'SoundEntity(volume: $volume)';
+
+  @override
   bool operator ==(covariant SoundEntity other) {
     if (identical(this, other)) return true;
 

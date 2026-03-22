@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:temp/core/utils/logger.dart';
 
 import '../../../shared/providers/theme/theme_notifier.dart';
 import '../controller/device_controller.dart';
 
 class DeviceControlView extends ConsumerWidget {
+  static const _logTag = "DeviceControlView";
+
   const DeviceControlView({super.key});
 
   @override
@@ -16,7 +19,7 @@ class DeviceControlView extends ConsumerWidget {
       body: Center(
         child: state.when(
           data: (data) {
-            print(data.toString());
+            Log.info(_logTag, data.toString());
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
