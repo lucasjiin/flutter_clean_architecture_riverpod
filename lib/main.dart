@@ -1,28 +1,17 @@
-// main.dart
-
-import 'dart:async';
-
-import 'package:app_flutter/application.dart';
-import 'package:app_flutter/core/dependencies.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart';
+import 'package:temp/ui/application.dart';
 
-const _logTag = 'main';
+const testMode = bool.fromEnvironment('IS_TEST');
+
+const List<Override> providerOverrides = [];
 
 void main() {
-  runZonedGuarded(
-    () async {
-      await dotenv.load(fileName: "assets/config/.env");
-
-      FlutterError.onError = (FlutterErrorDetails details) {
-        logger.error(_logTag, '$details');
-      };
-
-      runApp(ProviderScope(child: const Application()));
-    },
-    (error, stack) {
-      logger.error(_logTag, '$error', stackTrace: stack);
-    },
+  runApp(
+    const ProviderScope(
+      overrides: testMode ? providerOverrides : [],
+      child: Applicatin(),
+    ),
   );
 }

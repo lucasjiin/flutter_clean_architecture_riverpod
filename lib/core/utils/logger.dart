@@ -1,6 +1,4 @@
-// logger.dart
-
-import 'package:app_flutter/core/utils/time.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart' as log;
 import 'package:logger/web.dart';
 
@@ -11,7 +9,7 @@ abstract class Logger {
   void debug(String tag, String message);
 }
 
-final logTag = 'Logger';
+// final logTag = 'Logger';
 
 final class LoggerImpl extends Logger {
   final _logger = log.Logger(
@@ -23,23 +21,29 @@ final class LoggerImpl extends Logger {
 
   @override
   void error(String tag, String message, {Object? error, StackTrace? stackTrace}) {
-    _logger.e('${Time.format(hasMicroseconds: true)} [$tag] $message',
+    _logger.e('${_formatTime(hasMicroseconds: true)} [$tag] $message',
         time: DateTime.now(), error: error, stackTrace: stackTrace);
   }
 
   @override
   void warning(String tag, String message, {Object? error, StackTrace? stackTrace}) {
-    _logger.w('${Time.format(hasMicroseconds: true)} [$tag] $message',
+    _logger.w('${_formatTime(hasMicroseconds: true)} [$tag] $message',
         time: DateTime.now(), error: error, stackTrace: stackTrace);
   }
 
   @override
   void info(String tag, String message) {
-    _logger.i('${Time.format(hasMicroseconds: true)} [$tag] $message', time: DateTime.now());
+    _logger.i('$_formatTime(hasMicroseconds: true)} [$tag] $message', time: DateTime.now());
   }
 
   @override
   void debug(String tag, String message) {
-    _logger.d('${Time.format(hasMicroseconds: true)} [$tag] $message', time: DateTime.now());
+    _logger.d('${_formatTime(hasMicroseconds: true)} [$tag] $message', time: DateTime.now());
+  }
+
+  String _formatTime({DateTime? time, bool hasMicroseconds = false}) {
+    return DateFormat("yyyy-MM-dd HH:mm:ss${hasMicroseconds ? ".SSSS" : ""}").format(time ?? DateTime.now());
   }
 }
+
+final logger = LoggerImpl();
