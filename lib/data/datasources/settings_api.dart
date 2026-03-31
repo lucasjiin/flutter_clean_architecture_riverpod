@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../models/settings_model.dart';
@@ -16,39 +15,40 @@ class SettingsApiImpl extends SettingsApi {
   static const settingsGetPath = "";
   static const settingsSetPath = "";
 
-  final _bridge = StreamController();
-  final _subject = BehaviorSubject<SettingsModel>();
+  StreamController<SettingsModel>? _bridge;
+  StreamSubscription? _subscription;
+  BehaviorSubject<SettingsModel>? _subject;
 
-  SettingsApiImpl() {
-    // bridge.stream.listen(
-    //   (event) {
-    // _subject.add(SettingsModel(returnValue: true, userName: "Admin", role: "admin"));
-    //   },
-    //   onError: (error) {
-    //     _subject.addError(error);
-    //   },
-    // );
+  @override
+  Stream<SettingsModel> subscribe() {
+    _bridge ??= StreamController<SettingsModel>();
+    _subject ??= BehaviorSubject<SettingsModel>();
+    _subscription ??= _bridge!.stream.listen(
+      (event) {
+        _subject!.add(event);
+      },
+      onError: (error) {
+        _subject!.addError(error);
+      },
+    );
 
     Future.delayed(const Duration(milliseconds: 500), () {
-      _subject.add(SettingsModel(returnValue: true, userName: "Admin", role: "admin"));
+      _bridge!.add(SettingsModel(returnValue: true, userName: "Admin", role: "admin"));
     });
+
+    return _subject!.stream;
   }
 
   @override
-  Stream<SettingsModel> subscribe() => _subject.stream;
-
-  @override
-  Future<SettingsModel> getSettings() async => _subject.value;
+  Future<SettingsModel> getSettings() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return SettingsModel(returnValue: true, userName: "Admin", role: "admin");
+  }
 
   @override
   void dispose() {
-    _bridge.close();
-    _subject.close();
+    _subscription?.cancel();
+    _bridge?.close();
+    _subject?.close();
   }
 }
-
-final settingsApiProvider = Provider((ref) {
-  ref.onDispose(() => SettingsApiImpl().dispose());
-
-  return SettingsApiImpl();
-});

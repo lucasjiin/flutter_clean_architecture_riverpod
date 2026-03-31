@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class SoundEntity {
-  final int volume;
+  final int? volume;
+
   SoundEntity({
-    required this.volume,
+    this.volume,
   });
 
   SoundEntity copyWith({
@@ -12,6 +15,22 @@ class SoundEntity {
       volume: volume ?? this.volume,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'volume': volume,
+    };
+  }
+
+  factory SoundEntity.fromMap(Map<String, dynamic> map) {
+    return SoundEntity(
+      volume: map['volume'] != null ? map['volume'] as int : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory SoundEntity.fromJson(String source) => SoundEntity.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'SoundEntity(volume: $volume)';

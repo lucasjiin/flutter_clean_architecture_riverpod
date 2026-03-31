@@ -11,7 +11,7 @@ class SoundRepositoryImpl implements SoundRepository {
 
   @override
   Future<SoundEntity> fetch() async {
-    final m = await _api.fetch();
+    final m = await _api.getVolume();
     return SoundEntity(volume: m.volume);
   }
 

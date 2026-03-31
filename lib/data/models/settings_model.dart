@@ -3,12 +3,13 @@ import 'dart:convert';
 
 class SettingsModel {
   final bool returnValue;
-  final String userName;
-  final String role;
+  final String? userName;
+  final String? role;
+
   SettingsModel({
-    required this.returnValue,
-    required this.userName,
-    required this.role,
+    this.returnValue = false,
+    this.userName,
+    this.role,
   });
 
   SettingsModel copyWith({

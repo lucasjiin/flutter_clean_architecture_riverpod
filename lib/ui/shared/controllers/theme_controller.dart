@@ -6,11 +6,11 @@ enum AppThemeMode { light, dark }
 
 // [Theme Notifier]
 // 테마 상태 관리 및 로직
-final themeNotifierProvider = NotifierProvider<ThemeNotifier, AppThemeMode>(() {
-  return ThemeNotifier();
+final themeControllerProvider = NotifierProvider<ThemeController, AppThemeMode>(() {
+  return ThemeController();
 });
 
-class ThemeNotifier extends Notifier<AppThemeMode> {
+class ThemeController extends Notifier<AppThemeMode> {
   @override
   AppThemeMode build() {
     return AppThemeMode.light; // 기본값

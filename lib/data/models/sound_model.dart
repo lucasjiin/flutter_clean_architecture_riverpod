@@ -3,10 +3,11 @@ import 'dart:convert';
 
 class SoundModel {
   final bool returnValue;
-  final int volume;
+  final int? volume;
+
   SoundModel({
-    required this.returnValue,
-    required this.volume,
+    this.returnValue = false,
+    this.volume,
   });
 
   SoundModel copyWith({
